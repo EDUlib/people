@@ -1,0 +1,24 @@
+db:
+  image: mysql:5.6
+  container_name: db
+  environment:
+    MYSQL_ROOT_PASSWORD: ""
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+memcache:
+  image: memcached:1.4.24
+  container_name: memcache
+
+people:
+  # Uncomment this line to use the official people base image
+  image: people:v1
+
+  container_name: people
+  volumes:
+    - .:/edx/app/people/
+  command: bash -c 'gunicorn --reload --workers=2 --name people -b :8360 -c /edx/app/people/people/docker_gunicorn_configuration.py --log-file - --max-requests=1000 people.wsgi:application'
+
+  environment:
+    DJANGO_SETTINGS_MODULE: people.settings.devstack
+  ports:
+    - "18360:8360" # TODO: change this to your port
