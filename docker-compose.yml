@@ -16,9 +16,9 @@ people:
   container_name: people
   volumes:
     - .:/edx/app/people/
-  command: bash -c 'gunicorn --reload --workers=2 --name people -b :8360 -c /edx/app/people/people/docker_gunicorn_configuration.py --log-file - --max-requests=1000 people.wsgi:application'
+  command: bash -c 'gunicorn --reload --workers=2 --name people -b :18360 -c /edx/app/people/people/docker_gunicorn_configuration.py --log-file - --max-requests=1000 people.wsgi:application'
 
   environment:
     DJANGO_SETTINGS_MODULE: people.settings.devstack
   ports:
-    - "18360:8360" # TODO: change this to your port
+    - "18360:18360"

@@ -36,7 +36,7 @@ A new OAuth 2.0 client can be created when using Devstack by visiting ``http://1
     1. Click the :guilabel:`Add Application` button.
     2. Leave the user field blank.
     3. Specify the name of this service, ``People service``, as the client name.
-    4. Set the :guilabel:`URL` to the root path of this service: ``http://127.0.0.1:8003/``.
+    4. Set the :guilabel:`URL` to the root path of this service: ``http://127.0.0.1:18360/``.
     5. Set the :guilabel:`Redirect URL` to the complete endpoint: ``http://127.0.0.1:18360/complete/edx-oauth2/``.
     6. Copy the :guilabel:`Client ID` and :guilabel:`Client Secret` values. They will be used later.
     7. Select :guilabel:`Confidential` as the client type.

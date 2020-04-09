@@ -134,53 +134,19 @@ detect_changed_source_translations: ## check if translation files are up-to-date
 
 validate_translations: fake_translations detect_changed_source_translations ## install fake translations and check if translation files are up-to-date
 
-# Docker commands below
+docker_build:
+	docker build . -f Dockerfile -t openedx/people
+	docker build . -f Dockerfile --target newrelic -t openedx/people:latest-newrelic
 
-# dev.provision:
-# 	bash ./provision-people.sh
+travis_docker_tag: docker_build
+	docker tag openedx/people openedx/people:$$TRAVIS_COMMIT
+	docker tag openedx/people:latest-newrelic openedx/people:$$TRAVIS_COMMIT-newrelic
 
-# dev.init: dev.up dev.migrate
+travis_docker_auth:
+	echo "$$DOCKER_PASSWORD" | docker login -u "$$DOCKER_USERNAME" --password-stdin
 
-# dev.makemigrations:
-# 	docker exec -it people.people bash -c 'cd /edx/app/people/people && python3 manage.py makemigrations'
-
-# dev.migrate: # Migrates databases. Application and DB server must be up for this to work.
-# 	docker exec -it people.people bash -c 'cd /edx/app/people/people && make migrate'
-
-# dev.up: # Starts all containers
-# 	docker-compose up -d --build
-
-# dev.down: # Kills containers and all of their data that isn't in volumes
-# 	docker-compose down
-
-# dev.destroy: dev.down #Kills containers and destroys volumes. If you get an error after running this, also run: docker volume rm portal-designer_designer_mysql
-# 	docker volume rm enterprise-catalog_enterprise_catalog_mysql
-
-# dev.stop: # Stops containers so they can be restarted
-# 	docker-compose stop
-
-# %-shell: ## Run a shell on the specified service container
-# 	docker exec -it enterprise.catalog.$* bash
-
-# %-logs: ## View the logs of the specified service container
-# 	docker-compose logs -f --tail=500 $*
-
-# attach:
-# 	docker attach enterprise.catalog.app
-
-# docker_build:
-# 	docker build . --target app -t "openedx/enterprise-catalog:latest"
-# 	docker build . --target newrelic -t "openedx/enterprise-catalog:latest-newrelic"
-
-# travis_docker_auth:
-# 	echo "$$DOCKER_PASSWORD" | docker login -u "$$DOCKER_USERNAME" --password-stdin
-
-# travis_docker_tag: docker_build
-# 	docker build . --target app -t "openedx/enterprise-catalog:$$TRAVIS_COMMIT"
-# 	docker build . --target newrelic -t "openedx/enterprise-catalog:$$TRAVIS_COMMIT-newrelic"
-
-# travis_docker_push: travis_docker_tag travis_docker_auth ## push to docker hub
-# 	docker push "openedx/enterprise-catalog:latest"
-# 	docker push "openedx/enterprise-catalog:$$TRAVIS_COMMIT"
-# 	docker push "openedx/enterprise-catalog:latest-newrelic"
-# 	docker push "openedx/enterprise-catalog:$$TRAVIS_COMMIT-newrelic"
+travis_docker_push: travis_docker_tag travis_docker_auth ## push to docker hub
+	docker push 'openedx/people:latest'
+	docker push "openedx/people:$$TRAVIS_COMMIT"
+	docker push 'openedx/people:latest-newrelic'
+	docker push "openedx/people:$$TRAVIS_COMMIT-newrelic"
