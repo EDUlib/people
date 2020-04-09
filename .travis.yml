@@ -1,17 +1,19 @@
 language: python
 python:
-    - 3.6
+- 3.6
 sudo: false
-
 cache: pip
 before_install:
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 install:
-    - make ci_requirements
-    - pip install -U pip wheel codecov
+- make ci_requirements
+- pip install -U pip wheel codecov
 script:
-    - make validate_translations
-    - make validate
+- make validate_translations
+- make validate
 after_success:
-    - codecov
+- codecov
+env:
+  global:
+    secure: CKfsRAhFCz4semJMlGau0VVVTgAjgiHvwYKPlePJyS1Co7Fhv241FZUZ7nwV9cjn1nKDNjSMsK+lxTl3sXgCJt6ppi6VZ28fzzyaLEkS8VBXgHggqivggPxttfYEDaMK3epXVV3sZo0DPFv3z0r6Uv5IZfYEAJsQaRXEeANNSDkBm7aWVWesQxT2wpIVJUPreqjkLnIZ+L+3Lhc0i1Du+8sY+Qf/o05JxylGac3+9ZxAg5lrJ7g8YSsLH+dsercKEVNpDEufA7OqzU5TUTWN7v41nPhTgQIhYjLup6oi1e8g+bDhNNkpdq5EeN3ph2qrHYixuE0dHE5UJ64zTCE79MibseKZdH/pqvW2O+jBlmde7W4qaedcE09Hxnu4TsYlVrj3oiFgyyN2wkvPEqPw6pR4EsLzKf2qnnUFw3GtTQb0GeHuxh+X/jBvambBa82PdhidjJvojt1lNO0sWWKZQColcy+X3Qm21+VkaSjH5yClQnyrPDKowo8YlTXvdr80IkqRbdx41LZURTxRA7GOd2Tvj0fN3ALR4C1yf05cLp8z0lRP0R6tIp8iuJBVJGTXI2nNSF7QmbOaktaICYzwZ9LANeapY31dnHLaMaYUC4+WNF1vregdtfNobltdszvqKynvAM8YDg7CrCfhJSflW/o5eWHWINTo5h0bPYWMk1k=
