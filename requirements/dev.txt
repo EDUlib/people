@@ -17,7 +17,7 @@ click==7.1.1              # via -r requirements/pip-tools.txt, -r requirements/v
 code-annotations==0.3.3   # via -r requirements/validation.txt
 coreapi==2.3.3            # via -r requirements/validation.txt, django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via -r requirements/validation.txt, coreapi
-coverage==5.0.4           # via -r requirements/validation.txt, pytest-cov
+coverage==5.1             # via -r requirements/validation.txt, pytest-cov
 cryptography==2.9         # via -r requirements/validation.txt, social-auth-core
 defusedxml==0.6.0         # via -r requirements/validation.txt, python3-openid, social-auth-core
 diff-cover==2.6.1         # via -r requirements/dev.in
@@ -32,7 +32,7 @@ django==1.11.29           # via -r requirements/validation.txt, code-annotations
 djangorestframework==3.11.0  # via -r requirements/validation.txt, django-rest-swagger, drf-jwt, edx-drf-extensions, rest-condition
 drf-jwt==1.14.0           # via -r requirements/validation.txt, edx-drf-extensions
 edx-auth-backends==3.0.2  # via -r requirements/validation.txt
-edx-django-utils==3.1     # via -r requirements/validation.txt, edx-drf-extensions
+edx-django-utils==3.2.0   # via -r requirements/validation.txt, edx-drf-extensions
 edx-drf-extensions==5.0.2  # via -r requirements/validation.txt
 edx-i18n-tools==0.5.0     # via -r requirements/dev.in
 edx-lint==1.4.1           # via -r requirements/validation.txt
@@ -45,13 +45,13 @@ inflect==4.1.0            # via jinja2-pluralize
 isort==4.3.21             # via -r requirements/validation.txt, pylint
 itypes==1.1.0             # via -r requirements/validation.txt, coreapi
 jinja2-pluralize==0.3.0   # via diff-cover
-jinja2==2.11.1            # via -r requirements/validation.txt, code-annotations, coreschema, diff-cover, jinja2-pluralize
+jinja2==2.11.2            # via -r requirements/validation.txt, code-annotations, coreschema, diff-cover, jinja2-pluralize
 lazy-object-proxy==1.4.3  # via -r requirements/validation.txt, astroid
 markupsafe==1.1.1         # via -r requirements/validation.txt, jinja2
 mccabe==0.6.1             # via -r requirements/validation.txt, pylint
 mock==4.0.2               # via -r requirements/validation.txt
 more-itertools==8.2.0     # via -r requirements/validation.txt, pytest
-newrelic==5.10.0.138      # via -r requirements/validation.txt, edx-django-utils
+newrelic==5.12.0.140      # via -r requirements/validation.txt, edx-django-utils
 oauthlib==3.1.0           # via -r requirements/validation.txt, requests-oauthlib, social-auth-core
 openapi-codec==1.3.2      # via -r requirements/validation.txt, django-rest-swagger
 packaging==20.3           # via -r requirements/validation.txt, caniusepython3, pytest
