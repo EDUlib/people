@@ -73,7 +73,7 @@ social-auth-core==3.3.3   # via -r requirements/base.txt, edx-auth-backends, soc
 stevedore==1.32.0         # via -r requirements/base.txt, edx-opaque-keys
 typed-ast==1.4.1          # via astroid
 uritemplate==3.0.1        # via -r requirements/base.txt, coreapi
-urllib3==1.25.8           # via -r requirements/base.txt, requests
+urllib3==1.25.9           # via -r requirements/base.txt, requests
 wrapt==1.11.2             # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
