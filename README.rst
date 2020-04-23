@@ -11,7 +11,7 @@ The ``README.rst`` file should start with a brief description of the repository,
 
 Getting Started
 ===============
-To get the People devstack started run:
+To get the People devstack started, make sure your main devstack is running (https://github.com/edx/devstack) then run:
 
 1. ``make provision``
 2. ``make dev.up``
