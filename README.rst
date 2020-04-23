@@ -8,6 +8,16 @@ People service  |Travis|_ |Codecov|_
 
 The ``README.rst`` file should start with a brief description of the repository, which sets it in the context of other repositories under the ``edx`` organization. It should make clear where this fits in to the overall edX codebase. You may also want to provide a brief overview of the code in this repository, including the main components and useful entry points for starting to understand the code in more detail, or link to a comparable description in your repo's docs.
 
+
+Getting Started
+===============
+To get the People devstack started run:
+
+1. ``make provision``
+2. ``make dev.up``
+
+**NOTE** The development server is currently not hot reloading, so when you make code changes you'll need to run ``make dev.reload``
+
 Documentation
 -------------
 .. |ReadtheDocs| image:: https://readthedocs.org/projects/people/badge/?version=latest
