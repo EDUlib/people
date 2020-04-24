@@ -6,7 +6,8 @@
         migrate html_coverage upgrade extract_translation dummy_translations \
         compile_translations fake_translations  pull_translations \
         push_translations start-devstack open-devstack  pkg-devstack \
-        detect_changed_source_translations validate_translations
+        detect_changed_source_translations validate_translations dev.provision \
+		dev.up dev.down dev.reload
 
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -133,6 +134,18 @@ detect_changed_source_translations: ## check if translation files are up-to-date
 	cd people && i18n_tool changed
 
 validate_translations: fake_translations detect_changed_source_translations ## install fake translations and check if translation files are up-to-date
+
+dev.provision:
+	bash ./provision.sh
+
+dev.up:
+	docker-compose up -d
+
+dev.down:
+	docker-compose down
+
+dev.reload:
+	docker-compose restart app
 
 docker_build:
 	docker build . -f Dockerfile -t openedx/people

@@ -1,24 +1,45 @@
-db:
-  image: mysql:5.6
-  container_name: db
-  environment:
-    MYSQL_ROOT_PASSWORD: ""
-    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+version: "2.1"
+services:
+  db:
+    image: mysql:5.6
+    container_name: people.db
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "people"
+    networks:
+      - devstack_default
+    volumes:
+      - people_mysql:/var/lib/mysql
 
-memcache:
-  image: memcached:1.4.24
-  container_name: memcache
+  memcache:
+    image: memcached:1.4.24
+    container_name: people.memcache
+    networks:
+      - devstack_default
 
-people:
-  # Uncomment this line to use the official people base image
-  image: people:v1
+  app:
+    image: openedx/people:devstack
+    build: .
+    container_name: people.app
+    volumes:
+      - .:/edx/app/people/
+    command: bash -c 'while true; do gunicorn --reload --workers=2 --name people -b :18360 -c /edx/app/people/people/docker_gunicorn_configuration.py --log-file - --max-requests=1000 people.wsgi:application; sleep 2; done'
+    environment:
+      DJANGO_SETTINGS_MODULE: people.settings.devstack
+    ports:
+      - "18360:18360"
+    depends_on:
+      - db
+    volumes:
+      - .:/edx/app/people
+    networks:
+      - devstack_default
 
-  container_name: people
-  volumes:
-    - .:/edx/app/people/
-  command: bash -c 'gunicorn --reload --workers=2 --name people -b :18360 -c /edx/app/people/people/docker_gunicorn_configuration.py --log-file - --max-requests=1000 people.wsgi:application'
 
-  environment:
-    DJANGO_SETTINGS_MODULE: people.settings.devstack
-  ports:
-    - "18360:18360"
+networks:
+  devstack_default:
+    external: true
+
+volumes:
+  people_mysql:

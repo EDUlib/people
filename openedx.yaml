@@ -7,7 +7,6 @@ oeps:
   oep-7:  true  # Python 3
   oep-30: true  # PII annotation
   oep-0018: true  # Dependency management
-openedx-release: {ref: master}
 owner: tuchfarber
 supporting_teams:
   - edx/aperture

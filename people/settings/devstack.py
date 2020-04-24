@@ -3,6 +3,27 @@ from people.settings.local import *
 # Generic OAuth2 variables irrespective of SSO/backend service key types.
 OAUTH2_PROVIDER_URL = 'http://edx.devstack.lms:18000/oauth2'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'KEY_PREFIX': 'people',
+        'LOCATION': [
+            'people.memcache'
+        ]
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'people',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'people.db',
+        'PORT': '3306',
+    }
+}
+
 # OAuth2 variables specific to social-auth/SSO login use case.
 SOCIAL_AUTH_EDX_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_EDX_OAUTH2_KEY', 'people-sso-key')
 SOCIAL_AUTH_EDX_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_EDX_OAUTH2_SECRET', 'people-sso-secret')

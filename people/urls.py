@@ -27,7 +27,7 @@ from people.apps.core import views as core_views
 
 admin.autodiscover()
 
-urlpatterns = [
+urlpatterns = oauth2_urlpatterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(api_urls)),
     url(r'^api-docs/', get_swagger_view(title='people API')),
