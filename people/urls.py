@@ -23,6 +23,7 @@ from rest_framework_swagger.views import get_swagger_view
 
 from people.apps.api import urls as api_urls
 from people.apps.core import views as core_views
+from people.apps.demographics.rest_api import urls as demographics_urls
 
 
 admin.autodiscover()
@@ -30,12 +31,13 @@ admin.autodiscover()
 urlpatterns = oauth2_urlpatterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(api_urls)),
+    url(r'^api/', include(demographics_urls)),
     url(r'^api-docs/', get_swagger_view(title='people API')),
     # Use the same auth views for all logins, including those originating from the browseable API.
     url(r'^api-auth/', include(oauth2_urlpatterns)),
     url(r'^auto_auth/$', core_views.AutoAuth.as_view(), name='auto_auth'),
     url(r'^health/$', core_views.health, name='health'),
-]
+] 
 
 if settings.DEBUG and os.environ.get('ENABLE_DJANGO_TOOLBAR', False):  # pragma: no cover
     # Disable pylint import error because we don't install django-debug-toolbar
